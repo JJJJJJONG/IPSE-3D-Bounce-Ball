@@ -1,50 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Build.Content;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using UnityEditor.SceneManagement;
-using UnityEngine.EventSystems;
 
-//뒤로가기 버튼이 필요함.
 public class UIManager : MonoBehaviour
 {
     public Button[] stageButtons = new Button[15];
     public TextMeshProUGUI[] stageTexts = new TextMeshProUGUI[15];
-   
+
     Sprite openedBtnSprite;
     Sprite lockedBtnSprite;
-   
-    GameManager gameManager;
-    AudioManager audioManager;
-    SceneManager sceneManager;
 
     private void Awake()
-    {   
-        gameManager = FindObjectOfType<GameManager>();
-      
-        
+    {
+        //스테이지에서 돌아오면 커서가 잠긴 채라 버튼을 누를 수 없었음
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         openedBtnSprite = Resources.Load<Sprite>("Image/OpenedButton");
         lockedBtnSprite = Resources.Load<Sprite>("Image/RockedButton");
 
         //스테이지 자식 오브젝트(text)를 위한 변수 초기화
-        Scene scene = SceneManager.GetSceneByName("StageUI");
-
-        if(scene.name == "StageUI") 
+        for (int i = 0; i < stageButtons.Length; i++)
         {
-            for (int i = 0; i < gameManager.stageIndex; i++)
-            {
-
-                stageTexts[i] = stageButtons[i].GetComponentInChildren<TextMeshProUGUI>();
-
-            }
-
-           
+            if (stageButtons[i] != null)
+                stageTexts[i] = stageButtons[i].GetComponentInChildren<TextMeshProUGUI>(true);
         }
-
     }
 
     private void Start()
@@ -52,50 +32,21 @@ public class UIManager : MonoBehaviour
         //스테이지 초기화
         SetStage();
     }
-    private void Update()
+
+    //저장된 진행도(클리어한 스테이지)에 맞춰 버튼 이미지와 숫자를 표시
+    //(예전에는 비어 있는 starCount 배열을 매 프레임 비교해서 2스테이지는 잠기고 3스테이지가 열려 있었음)
+    public void SetStage()
     {
- 
-        CheckStage();
-    }
-
-    public void SetStage() 
-    {
-
-        stageButtons[0].image.sprite = openedBtnSprite;
-
-        stageTexts[0].gameObject.SetActive(true);
-
-        for(int i = 1; i < gameManager.stageIndex; i++)
+        for (int i = 0; i < stageButtons.Length; i++)
         {
-            stageButtons[i].image.sprite = lockedBtnSprite;
+            if (stageButtons[i] == null)
+                continue;
 
-            stageTexts[i].gameObject.SetActive(false);
-        }
-          
-    }
-    void CheckStage() //스테이지가 클리어 됐는지 안됐는지 확인.
-    {
-        bool isOpen = false;
+            bool isOpen = GameManager.CanPlayStage(i + 1);
+            stageButtons[i].image.sprite = isOpen ? openedBtnSprite : lockedBtnSprite;
 
-        if (gameManager.starCount[gameManager.stageNumber + 1] == gameManager.totalStarCount[gameManager.stageNumber + 1])
-        {
-            isOpen = true;
-            int rstageNumber = gameManager.stageNumber+1;
-            UpdateStageImage(isOpen, rstageNumber);
+            if (stageTexts[i] != null)
+                stageTexts[i].gameObject.SetActive(isOpen);
         }
     }
-    
-    
-    void UpdateStageImage(bool isOpen, int rstageNumber) //스테이지를 업데이트
-    {
-        if (isOpen)
-        {
-            // 스테이지가 열렸을 때, 스프라이트를 열린 스테이지의 스프라이트로 변경
-            stageButtons[rstageNumber].image.sprite = openedBtnSprite;
-            stageTexts[rstageNumber].gameObject.SetActive(true);
-        }
-
-    }
-   
-
 }

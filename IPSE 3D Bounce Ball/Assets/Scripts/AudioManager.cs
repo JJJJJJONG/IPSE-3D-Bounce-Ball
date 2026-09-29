@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Audio;
-
+﻿using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
@@ -13,22 +9,23 @@ public class AudioManager : MonoBehaviour
     public AudioClip button;
     public AudioClip itemBlock;
 
-    AudioSource  audio;
+    AudioSource audioSource;
 
     void Awake()
     {
-       audio = gameObject.GetComponent<AudioSource>();
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
+        //씬마다 AudioManager가 있으므로 처음 것만 남기고 나머지는 바로 종료
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            return;
         }
 
-        audio = GetComponent<AudioSource>();
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
         LoadAudioClips();
     }
 
@@ -42,21 +39,24 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySound(string clipName)
     {
+        AudioClip clip = null;
         switch (clipName)
         {
             case "Bounce":
-                audio.clip = bounce;
+                clip = bounce;
                 break;
             case "GetStar":
-                audio.clip = getStar;
+                clip = getStar;
                 break;
             case "ItemBlock":
-                audio.clip = itemBlock;
+                clip = itemBlock;
                 break;
             case "Button":
-                audio.clip = button;
+                clip = button;
                 break;
         }
-        audio.Play();
+        //clip을 갈아끼우면 이전 소리가 끊기므로 겹쳐서 재생
+        if (clip != null)
+            audioSource.PlayOneShot(clip);
     }
 }
