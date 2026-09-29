@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,8 +13,8 @@ public class CameraMove : MonoBehaviour
     private void Awake()
     {
         playerTransform = GameObject.Find("Ball").transform;
-        offset = transform.position - playerTransform.position; //Ä«¸Ş¶óÀÇ À§Ä¡ - °øÀÇ À§Ä¡ 
-        Cursor.lockState = CursorLockMode.Locked; //È­¸é Ä¿¼­ Àá±İ
+        offset = transform.position - playerTransform.position; //ì¹´ë©”ë¼ì˜ ìœ„ì¹˜ - ê³µì˜ ìœ„ì¹˜ 
+        Cursor.lockState = CursorLockMode.Locked; //í™”ë©´ ì»¤ì„œ ì ê¸ˆ
         
     }
 
@@ -23,11 +23,11 @@ public class CameraMove : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime; 
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        xRotation -= mouseY; //¾Æ·¡·Î ³»¸®¸é Y°ª - -- + ½Ã°è
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f); //yÃà È¸ÀüÀ» -90 90±îÁö·Î ÁöÁ¤
-        yRotation += mouseX; //¿Ş¿À ¿Ş¿À
+        xRotation -= mouseY; //ì•„ë˜ë¡œ ë‚´ë¦¬ë©´ Yê°’ - -- + ì‹œê³„
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f); //yì¶• íšŒì „ì„ -90 90ê¹Œì§€ë¡œ ì§€ì •
+        yRotation += mouseX; //ì™¼ì˜¤ ì™¼ì˜¤
 
-        Quaternion rotation = Quaternion.Euler(xRotation, yRotation, 0f); //À¯ˆ¡Æ¼¿¡¼­´Â È¸Àü°ªÀ» ÄõÅÍ´Ï¾ğÀ¸·Î Ç¥Çö
+        Quaternion rotation = Quaternion.Euler(xRotation, yRotation, 0f); //ìœ ë‹¡í‹°ì—ì„œëŠ” íšŒì „ê°’ì„ ì¿¼í„°ë‹ˆì–¸ìœ¼ë¡œ í‘œí˜„
         transform.position = playerTransform.position + rotation * offset;
         transform.LookAt(playerTransform.position);
     }

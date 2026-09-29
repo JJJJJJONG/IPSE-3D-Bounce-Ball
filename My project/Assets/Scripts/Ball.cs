@@ -1,14 +1,14 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    //Á¡ÇÁ ÆÄ¿ö
+    //ì í”„ íŒŒì›Œ
     public float jumpPower;
-    //°øÀÇ ÃÖ´ë ¼Óµµ
+    //ê³µì˜ ìµœëŒ€ ì†ë„
     public float maxSpeed;
-    //¿òÁ÷ÀÌ´Â Èû
+    //ì›€ì§ì´ëŠ” í˜
     public float movePower;
 
     Rigidbody rb;
@@ -16,31 +16,31 @@ public class Ball : MonoBehaviour
     public AudioClip bounce;
 
     private void Start()
-    {   //º¯¼ö ÃÊ±âÈ­
+    {   //ë³€ìˆ˜ ì´ˆê¸°í™”
         rb = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
     {
-        //¼öÆò¹æÇâ(X)
+        //ìˆ˜í‰ë°©í–¥(X)
         float h = Input.GetAxisRaw("Horizontal");
-        //¼öÁ÷¹æÇâ(Z)
+        //ìˆ˜ì§ë°©í–¥(Z)
         float v =Input.GetAxisRaw("Vertical"); 
-        //º¤ÅÍ¸¦ Ä«¸Ş¶óÀÇ ·ÎÄÃ ÁÂÇ¥°è ±âÁØÀ¸·Î º¯È¯
+        //ë²¡í„°ë¥¼ ì¹´ë©”ë¼ì˜ ë¡œì»¬ ì¢Œí‘œê³„ ê¸°ì¤€ìœ¼ë¡œ ë³€í™˜
         Vector3 direction = Camera.main.transform.TransformDirection(h, 0,v);
-        //°ø¿¡ Èû °¡ÇÏ±â
+        //ê³µì— í˜ ê°€í•˜ê¸°
         rb.AddForce(movePower * direction, ForceMode.Force);
-        //¼öÆò¹æÇâ ¼Óµµ
+        //ìˆ˜í‰ë°©í–¥ ì†ë„
         Vector2 horizontalVelocity = new Vector2(rb.velocity.x,rb.velocity.z);
-        //ÃÖ´ë¼Ó·Â Á¦ÇÑ
+        //ìµœëŒ€ì†ë ¥ ì œí•œ
         if(horizontalVelocity.magnitude > maxSpeed) 
         {
             horizontalVelocity = horizontalVelocity.normalized * maxSpeed;
             rb.velocity = new Vector3(horizontalVelocity.x, rb.velocity.y, rb.velocity.z);
         }
 
-        /*float h = Input.GetAxisRaw("Horizontal"); //¼öÆò¹æÇâ
-        float v =Input.GetAxisRaw("Vertical"); //¼öÁ÷¹æÇâ
+        /*float h = Input.GetAxisRaw("Horizontal"); //ìˆ˜í‰ë°©í–¥
+        float v =Input.GetAxisRaw("Vertical"); //ìˆ˜ì§ë°©í–¥
         Vector3 direction = new Vector3(h,0, v).normalized; 
         direction=Camera.main.transform.TransformDirection(direction);
         direction.y = 0;*/
@@ -48,10 +48,10 @@ public class Ball : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        //°ø°ú ¹Ù´ÚÀÌ ´êÀ¸¸é
+        //ê³µê³¼ ë°”ë‹¥ì´ ë‹¿ìœ¼ë©´
         if(collision.gameObject.name == "Floor") 
         {
-            //yÃà ¹æÇâÀ¸·Î Æ¨±ä´Ù
+            //yì¶• ë°©í–¥ìœ¼ë¡œ íŠ•ê¸´ë‹¤
             rb.AddForce(new Vector3(0,jumpPower,0), ForceMode.Impulse); 
             
         }

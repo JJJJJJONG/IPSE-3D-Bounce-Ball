@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting; 
 using UnityEngine;
@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour, IPointerClickHandler
         Scene scene = SceneManager.GetSceneByName("StageUI");
         if (scene.name != "StageUI") 
         {   
-            //°¢ ½ºÅ×ÀÌÁöÀÇ º° °³¼ö°¡ ¸î°³ÀÎÁö ÀúÀå
+            //ê° ìŠ¤í…Œì´ì§€ì˜ ë³„ ê°œìˆ˜ê°€ ëª‡ê°œì¸ì§€ ì €ì¥
             for(int i=0; i<stageIndex; i++) 
             {
                 totalStarCount[i] = GameObject.FindGameObjectsWithTag("Star").Length;
@@ -41,11 +41,11 @@ public class GameManager : MonoBehaviour, IPointerClickHandler
 
        
     }
-    private void OnTriggerEnter(Collider other) //¶³¾îÁ³À» ¶§ ¸®½ºÆù
+    private void OnTriggerEnter(Collider other) //ë–¨ì–´ì¡Œì„ ë•Œ ë¦¬ìŠ¤í°
     {
         if(other.gameObject.tag == "Player") 
         {
-            SceneManager.LoadScene(stageNumber+1); //½ºÅ×ÀÌ³Ñ¹ö¶û ºôµå ´Ü°è¸¦ °°°ÔÇÑ´Ù?
+            SceneManager.LoadScene(stageNumber+1); //ìŠ¤í…Œì´ë„˜ë²„ë‘ ë¹Œë“œ ë‹¨ê³„ë¥¼ ê°™ê²Œí•œë‹¤?
         }
     }
     public void OnPointerClick(PointerEventData eventData) 
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour, IPointerClickHandler
         {
             SceneManager.LoadScene(buttonName);
             audioManager.PlaySound("Button");
-            Debug.Log("ÀÀ¾Ö");
+            Debug.Log("ì‘ì• ");
         }
         
    

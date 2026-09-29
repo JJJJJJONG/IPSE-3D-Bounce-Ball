@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
@@ -24,26 +24,26 @@ public class PauseUIManager : MonoBehaviour, IPointerClickHandler
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Q)) //ÀÏ½ÃÁ¤Áö ¹öÆ° ´­·¶À»¶§
+        if (Input.GetKey(KeyCode.Q)) //ì¼ì‹œì •ì§€ ë²„íŠ¼ ëˆŒë €ì„ë•Œ
         {
             audioManager.PlaySound("Button");
-            //¸¶¿ì½º Ä¿¼­ È°¼ºÈ­ ¹× Àá±İ ÇØÁ¦
+            //ë§ˆìš°ìŠ¤ ì»¤ì„œ í™œì„±í™” ë° ì ê¸ˆ í•´ì œ
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            //½Ã°£ Á¤Áö
+            //ì‹œê°„ ì •ì§€
             Time.timeScale = 0;
-            //¹öÆ° È°¼ºÈ­
+            //ë²„íŠ¼ í™œì„±í™”
             retryButton.gameObject.SetActive(true);
             homeButton.gameObject.SetActive(true);
         }
-        else if (Input.GetKey(KeyCode.R)) //ÀÏ½ÃÁ¤Áö ¹öÆ° ´­·¶À»¶§
+        else if (Input.GetKey(KeyCode.R)) //ì¼ì‹œì •ì§€ ë²„íŠ¼ ëˆŒë €ì„ë•Œ
         {
             audioManager.PlaySound("Button");
-            //¸¶¿ì½º Ä¿¼­ ºñÈ°¼ºÈ­
+            //ë§ˆìš°ìŠ¤ ì»¤ì„œ ë¹„í™œì„±í™”
             Cursor.visible = false;
-            //½Ã°£ Àç»ı
+            //ì‹œê°„ ì¬ìƒ
             Time.timeScale = 1;
-            //¹öÆ° ºñÈ°¼ºÈ­
+            //ë²„íŠ¼ ë¹„í™œì„±í™”
             retryButton.gameObject.SetActive(false);
             homeButton.gameObject.SetActive(false);
         }
@@ -58,25 +58,25 @@ public class PauseUIManager : MonoBehaviour, IPointerClickHandler
 
         if (buttonName == "HomeButton")
         {
-            //»ç¿îµå Àç»ı
+            //ì‚¬ìš´ë“œ ì¬ìƒ
             audioManager.PlaySound("Button");
-            //StageUI·Î È­¸é ÀüÈ¯
+            //StageUIë¡œ í™”ë©´ ì „í™˜
             SceneManager.LoadScene("StageUI");
-            //UI ºñÈ°¼ºÈ­
+            //UI ë¹„í™œì„±í™”
             pauseUI.SetActive(false);
-            //½Ã°£ Àç»ı
+            //ì‹œê°„ ì¬ìƒ
             Time.timeScale = 1;
 
         }
         else if (buttonName == "RetryButton")
         {
-            //»ç¿îµå Àç»ı
+            //ì‚¬ìš´ë“œ ì¬ìƒ
             audioManager.PlaySound("Button");
-            //ÇÃ·¹ÀÌ ÇÏ°íÀÖ´Â È­¸é ´Ù½Ã Àç»ı
+            //í”Œë ˆì´ í•˜ê³ ìˆëŠ” í™”ë©´ ë‹¤ì‹œ ì¬ìƒ
             SceneManager.LoadScene(gameManager.stageNumber + 1);
-            //UIºñÈ°¼ºÈ­
+            //UIë¹„í™œì„±í™”
             pauseUI.SetActive(false);
-            //½Ã°£ Àç»ı
+            //ì‹œê°„ ì¬ìƒ
             Time.timeScale = 1;
         }
 

@@ -1,15 +1,15 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    //Á¡ÇÁ ÆÄ¿ö
+    //ì í”„ íŒŒì›Œ
     public float jumpPower;
-    //°øÀÇ ÃÖ´ë ¼Óµµ
+    //ê³µì˜ ìµœëŒ€ ì†ë„
     public float maxSpeed;
-    //°øÀÇ µ¿·Â
+    //ê³µì˜ ë™ë ¥
     public float movePower;
 
     Rigidbody rb;
@@ -18,18 +18,18 @@ public class Ball : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate() // W A S D·Î ¿òÁ÷ÀÌ±â
+    void FixedUpdate() // W A S Dë¡œ ì›€ì§ì´ê¸°
     {
 
-        float h = Input.GetAxisRaw("Horizontal"); //¼öÆò¹æÇâ(¿ŞÂÊ, ¿À¸¥ÂÊ)
-        float v = Input.GetAxisRaw("Vertical");   //¼öÁ÷¹æÇâ(¾Õ, µÚ)
+        float h = Input.GetAxisRaw("Horizontal"); //ìˆ˜í‰ë°©í–¥(ì™¼ìª½, ì˜¤ë¥¸ìª½)
+        float v = Input.GetAxisRaw("Vertical");   //ìˆ˜ì§ë°©í–¥(ì•, ë’¤)
 
-        //X Y ZÃàÀ» Ä«¸Ş¶ó ±âÁØÀ¸·Î º¯°æ
+        //X Y Zì¶•ì„ ì¹´ë©”ë¼ ê¸°ì¤€ìœ¼ë¡œ ë³€ê²½
         Vector3 direction = new Vector3(h, 0, v).normalized;
         direction = Camera.main.transform.TransformDirection(direction);
         direction.y = 0;
 
-        rb.AddForce(direction * movePower, ForceMode.Force);  // directionÀ» »ç¿ëÇÏ°í, ForceMode¸¦ Force·Î º¯°æ
+        rb.AddForce(direction * movePower, ForceMode.Force);  // directionì„ ì‚¬ìš©í•˜ê³ , ForceModeë¥¼ Forceë¡œ ë³€ê²½
 
         Vector2 horizontalVelocity = new Vector2(rb.velocity.x, rb.velocity.z);
 

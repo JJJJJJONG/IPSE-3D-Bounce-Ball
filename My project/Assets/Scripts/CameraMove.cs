@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,20 +19,20 @@ public class CameraMove : MonoBehaviour
 
     void LateUpdate()
     {
-        //¸¶¿ì½º ¿òÁ÷ÀÓÀ» ½Ã°£¿¡ µû¶ó ÀÔ·Â¹ŞÀ½
+        //ë§ˆìš°ìŠ¤ ì›€ì§ì„ì„ ì‹œê°„ì— ë”°ë¼ ì…ë ¥ë°›ìŒ
         float mouseX = Input.GetAxis("Mouse X")* mouseSesitivity* Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSesitivity * Time.deltaTime;
         
-        //XÃà È¸Àü°ú YÃàÈ¸Àü
+        //Xì¶• íšŒì „ê³¼ Yì¶•íšŒì „
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90, 90);
         yRotation += mouseX;
 
-        //¿ÀÀÏ·¯ °¢À» ÄõÅÍ´Ï¾ğÀ¸·Î º¯È¯
+        //ì˜¤ì¼ëŸ¬ ê°ì„ ì¿¼í„°ë‹ˆì–¸ìœ¼ë¡œ ë³€í™˜
         Quaternion rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        //Ä«¸Ş¶óÀÇ À§Ä¡
+        //ì¹´ë©”ë¼ì˜ ìœ„ì¹˜
         transform.position = playerTransform.position + (rotation * offset);
-        //Ä«¸Ş¶óÀÇ ¾ÕÀ» °øÀ¸·Î ¼³Á¤
+        //ì¹´ë©”ë¼ì˜ ì•ì„ ê³µìœ¼ë¡œ ì„¤ì •
         transform.LookAt(playerTransform.position);
     }
 }

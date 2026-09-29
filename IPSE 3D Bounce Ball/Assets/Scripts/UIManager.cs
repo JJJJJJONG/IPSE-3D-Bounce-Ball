@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
 using UnityEngine.EventSystems;
 
-//µÚ·Î°¡±â ¹öÆ°ÀÌ ÇÊ¿äÇÔ.
+//ë’¤ë¡œê°€ê¸° ë²„íŠ¼ì´ í•„ìš”í•¨.
 public class UIManager : MonoBehaviour
 {
     public Button[] stageButtons = new Button[15];
@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour
         openedBtnSprite = Resources.Load<Sprite>("Image/OpenedButton");
         lockedBtnSprite = Resources.Load<Sprite>("Image/RockedButton");
 
-        //½ºÅ×ÀÌÁö ÀÚ½Ä ¿ÀºêÁ§Æ®(text)¸¦ À§ÇÑ º¯¼ö ÃÊ±âÈ­
+        //ìŠ¤í…Œì´ì§€ ìì‹ ì˜¤ë¸Œì íŠ¸(text)ë¥¼ ìœ„í•œ ë³€ìˆ˜ ì´ˆê¸°í™”
         Scene scene = SceneManager.GetSceneByName("StageUI");
 
         if(scene.name == "StageUI") 
@@ -49,7 +49,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        //½ºÅ×ÀÌÁö ÃÊ±âÈ­
+        //ìŠ¤í…Œì´ì§€ ì´ˆê¸°í™”
         SetStage();
     }
     private void Update()
@@ -73,7 +73,7 @@ public class UIManager : MonoBehaviour
         }
           
     }
-    void CheckStage() //½ºÅ×ÀÌÁö°¡ Å¬¸®¾î µÆ´ÂÁö ¾ÈµÆ´ÂÁö È®ÀÎ.
+    void CheckStage() //ìŠ¤í…Œì´ì§€ê°€ í´ë¦¬ì–´ ëëŠ”ì§€ ì•ˆëëŠ”ì§€ í™•ì¸.
     {
         bool isOpen = false;
 
@@ -86,11 +86,11 @@ public class UIManager : MonoBehaviour
     }
     
     
-    void UpdateStageImage(bool isOpen, int rstageNumber) //½ºÅ×ÀÌÁö¸¦ ¾÷µ¥ÀÌÆ®
+    void UpdateStageImage(bool isOpen, int rstageNumber) //ìŠ¤í…Œì´ì§€ë¥¼ ì—…ë°ì´íŠ¸
     {
         if (isOpen)
         {
-            // ½ºÅ×ÀÌÁö°¡ ¿­·ÈÀ» ¶§, ½ºÇÁ¶óÀÌÆ®¸¦ ¿­¸° ½ºÅ×ÀÌÁöÀÇ ½ºÇÁ¶óÀÌÆ®·Î º¯°æ
+            // ìŠ¤í…Œì´ì§€ê°€ ì—´ë ¸ì„ ë•Œ, ìŠ¤í”„ë¼ì´íŠ¸ë¥¼ ì—´ë¦° ìŠ¤í…Œì´ì§€ì˜ ìŠ¤í”„ë¼ì´íŠ¸ë¡œ ë³€ê²½
             stageButtons[rstageNumber].image.sprite = openedBtnSprite;
             stageTexts[rstageNumber].gameObject.SetActive(true);
         }

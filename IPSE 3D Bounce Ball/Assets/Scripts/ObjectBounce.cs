@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -10,10 +10,10 @@ public class ObjectBounce : MonoBehaviour
     
     void Update()
     {
-        //È¸Àü
+        //íšŒì „
         transform.Rotate(new Vector3(0,10,0) * rotatespeed * Time.deltaTime, Space.Self);
 
-        // À§¾Æ·¡·Î ¿òÁ÷ÀÓ
+        // ìœ„ì•„ë˜ë¡œ ì›€ì§ì„
         Vector3 position = transform.position;
         position.y += Mathf.Sin(Time.time*3) * (float)0.001 *amplitude;
         transform.position = position;
